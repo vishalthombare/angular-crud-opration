@@ -1,0 +1,60 @@
+<div class="container">  
+  <div class="row">  
+      <div class="form_bg">  
+          <form  (ngSubmit)="insertData()">  
+               <h2 class="text-center">User Profile</h2>  
+              <br/>  
+              <div class="form-group">  
+                  <input type="text" class="form-control" placeholder="First Name" name="firstname" [(ngModel)]="userName">   
+              </div>  
+              <div class="form-group">  
+                  <input type="text" class="form-control"  placeholder="Last Name" name="lastname" [(ngModel)]="lName">  
+              </div>  
+              <div class="form-group">  
+                  <input type="email" class="form-control" id="email" placeholder="Email" name="email" [(ngModel)]="emailId">  
+              </div>  
+               <div class="form-group">  
+              </div>  
+              <br/>  
+              <div class="align-center">  
+                  <button type="submit" class="btn btn-primary" id="register">Submit</button>  
+              </div>  
+          </form>  
+      </div>  
+  </div> 
+  <br>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th scope="col">No.</th>
+        <th scope="col">First Name</th>
+        <th scope="col">Last Name</th>
+        <th scope="col">Email Id</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of registrationArr, let i = index">
+        <td>{{i+1}}</td>
+        <td>
+          <input type="text" class="form-control"  [(ngModel)]="userName" *ngIf="i===updatedIndex">
+          {{item.firstName}}</td>
+        <td>
+          <input type="text" class="form-control"   [(ngModel)]="lName" *ngIf="i===updatedIndex">
+          {{item.lastName}}</td>
+        <td>
+          <input type="email" class="form-control"  [(ngModel)]="emailId" *ngIf="i===updatedIndex"> 
+          {{item.emailId}}
+        </td>
+        <td><button class="btn btn-primary" (click)="deleteData(i)">Delete</button></td>
+        <td>
+          <button class="btn btn-primary" (click)="updateRecord(i)" *ngIf="i !== updatedIndex">Update</button>
+          <button class="btn btn-primary" (click)="completeUpdate(i)" *ngIf="i === updatedIndex">complete</button>
+        </td>
+      
+      </tr>
+     
+    </tbody>
+  </table> 
+</div>

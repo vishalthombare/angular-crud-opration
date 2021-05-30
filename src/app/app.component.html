@@ -1,0 +1,103 @@
+<div class="container">
+  <div class="row">  
+      <div class="form_bg">  
+          <form #dataPass="ngForm" (submit)="insertData(dataPass)">  
+               <h2 class="text-center">Crud Operations</h2>  
+              <br/> 
+              <div class="form-group">  
+                  <input type="text" class="form-control" 
+                  placeholder="Name" name="name" 
+                  [(ngModel)]="userName">   
+              </div>  
+
+              <div class="form-group">  
+                  <input type="email" class="form-control" 
+                  id="email" placeholder="Email" name="email" 
+                  [(ngModel)]="userEmail">  
+              </div>  
+
+              <div class="form-group">  
+                  <input type="number" class="form-control" 
+                  id="mobile" placeholder="Mobile" 
+                  name="mobile_number" [(ngModel)]="userMobile">  
+              </div>
+
+              <div class="form-group">
+                <select class="form-select" aria-label="Default select example"
+                    name="department" id="Department" [ngModel]="Department">                  
+                    <option                      
+                     *ngFor="let item of DepartmentList" [value]="item">
+                        {{item}}
+                    </option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <select class="form-select" aria-label="Default select example"
+                 name="designation" id="designation" [ngModel]="Designation" >                  
+                        <option                      
+                        *ngFor="let item of DesignationList" [value]="item">
+                        {{item}}
+                        </option>
+                </select>
+              </div>
+
+              <div class="radio" *ngFor="let gender of genders">
+                <label>
+                  <input type="radio" name="gender"
+                    ngModel [value]="gender" required>
+                   {{ gender }}
+                 </label>             
+              </div> 
+
+              <br/>  
+              <div class="align-center">
+                <app-button type="submit" 
+                  [hasColor]="true" [text]="'SUBMIT'">
+                </app-button>
+              </div>  
+          </form>  
+      </div>  
+  </div> 
+
+  <br>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Mobile</th>
+        <th scope="col">Department</th>
+        <th scope="col">Designation</th>
+        <th scope="col">Gender</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of getDataServer, let i = index">
+        <td>{{item.id}}</td>
+        <td>{{item.name}}</td>
+        <td>{{item.email}}</td>
+        <td>{{item.mobile_number}}</td>
+        <td>{{item.gender}}</td>
+        <td>{{item.department}}</td>
+        <td>{{item.designation}}</td>
+        <td>
+          <app-button 
+            (click)="deleteData(item.id)" 
+            [hasColor]="true" [text]="'DELETE'">
+          </app-button>
+        </td>
+          
+        <td>
+          <!-- <button class="btn btn-primary" (click)="updateRecord(i)" *ngIf="i !== updatedIndex">Edit</button> -->
+          <app-button ((click)="updateRecord(i)" [hasColor]="false" [text]="'EDIT'"></app-button>
+          <!-- <button class="btn btn-primary" (click)="completeUpdate(i)" *ngIf="i === updatedIndex">complete</button> -->
+          <app-button (click)="completeUpdate(i)" *ngIf="i === updatedIndex" [hasColor]="true" [text]="'COMPLETE'"></app-button>
+        </td>      
+      </tr>     
+    </tbody>
+  </table> 
+</div>
